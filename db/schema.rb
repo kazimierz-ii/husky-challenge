@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_05_175851) do
+ActiveRecord::Schema.define(version: 2022_02_05_201134) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "access_tokens", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "token"
+    t.string "status", limit: 1
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "approved_at", precision: 6
+    t.datetime "revoked_at", precision: 6
+    t.datetime "last_access_at", precision: 6
+    t.index ["status"], name: "index_access_tokens_on_status"
+    t.index ["user_id"], name: "index_access_tokens_on_user_id"
+  end
 
   create_table "invoices", force: :cascade do |t|
     t.string "invoice_number"
@@ -26,4 +39,11 @@ ActiveRecord::Schema.define(version: 2022_02_05_175851) do
     t.text "invoice_to"
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "access_tokens", "users"
 end

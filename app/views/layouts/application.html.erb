@@ -11,9 +11,16 @@
   </head>
 
   <body>
-    <% if session[:current_user_token] %>
-      <p style="text-align: right"><%= link_to('Log Out', logout_invoices_path) %></p>
+    <% if current_user %>
+      <p style="text-align: right">Hi <%= current_user.email %>, <%= link_to('log out', logout_users_path) %></p>
     <% end %>
+
+    <% if flash.any? %>
+      <% flash.each do |type, msg| %>
+        <div class="alert flash-<%= type %>"><%= msg %></div>
+      <% end %>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

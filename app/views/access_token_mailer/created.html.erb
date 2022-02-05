@@ -1,0 +1,9 @@
+<strong>New Access Token</strong><br />
+<br />
+<p>
+  Hi <%= @user.email %>, a new access token was requested for your email, if it was you that requested this access token, please click on the following link to activate the token and log in the app. Please be aware that activating an access token revokes your previous token if you had any.
+</p><br />
+<p><%= link_to('Activate new access token', activate_token_url(@access_token.token)) %></p><br />
+<p>
+  You can ignore this email if it was not you that requested this new access token.
+</p>
