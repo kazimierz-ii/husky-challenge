@@ -1,10 +1,16 @@
 <h1>Invoices</h1>
-
+<div>
+  <%= form_with(url: invoices_path, method: :get) do |form| %>
+    Invoice number: <%= form.text_field :invoice_number, value: params[:invoice_number] %>
+    Invoice date from <%= form.date_field :invoice_date_from, value: params[:invoice_date_from] %>
+    Invoice date to <%= form.date_field :invoice_date_to, value: params[:invoice_date_to] %>
+    <%= form.submit 'Filter' %>
+  <% end %>
+</div>
 <div id="invoices">
   <% @invoices.each do |invoice| %>
-    <%= render invoice %>
     <p>
-      <%= link_to "Show this invoice", invoice %>
+      Invoice number: <%= invoice.invoice_number %>, Invoice date: <%= invoice.invoice_date %>, <%= link_to "Details", invoice %>
     </p>
   <% end %>
 </div>

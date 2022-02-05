@@ -1,6 +1,29 @@
-<h1>Editing invoice</h1>
+<h1>Send invoice to other emails</h1>
 
-<%= render "form", invoice: @invoice %>
+<%= form_with(model: @new_invoice, url: @invoice, method: :put) do |form| %>
+  <% if @new_invoice.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@new_invoice.errors.count, "error") %> prohibited this invoice from being saved:</h2>
+
+      <ul>
+        <% @new_invoice.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= render @invoice %>
+
+  <div>
+    <%= form.label :new_emails, style: "display: block" %>
+    <%= form.text_area :emails, { value: nil } %>
+  </div>
+
+  <div>
+    <%= form.submit 'Send' %>
+  </div>
+<% end %>
 
 <br>
 
