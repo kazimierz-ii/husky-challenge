@@ -13,5 +13,7 @@ Rails.application.routes.draw do
 
   resources :invoices
 
+  get '/api_doc', to: 'invoices#api_doc'
+
   root "tokens#index"
 end

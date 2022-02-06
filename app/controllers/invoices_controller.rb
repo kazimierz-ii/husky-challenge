@@ -1,9 +1,37 @@
 class InvoicesController < ApplicationController
   before_action do
-    redirect_to(root_path, notice: 'Unauthorized access!') if request.format.html? && !current_user
+    if action_name != 'api_doc'
+      if request.format.html? && !current_user
+        redirect_to(root_path, notice: 'Unauthorized access!')
+      elsif request.format.json?
+        access_token = AccessToken.approved.find_by_token(params[:token])
+        if access_token
+          access_token.touch_last_access_at!
+        else
+          render json: { message: 'You need a valid token to use the API.' }, status: :unauthorized
+        end
+      end
+    end
   end
 
   before_action :set_invoice, only: %i[ show edit update ]
+
+  def api_doc
+    @sample_invoice = {
+      id: 789456,
+      invoice_number: '789456123',
+      invoice_date: Date.today,
+      invoice_from: 'Sample invoice from',
+      invoice_to: 'Sample invoice to',
+      total_amount_due: '$ 199',
+      emails: 'sample@email.com,email@sample.com',
+      url: invoice_url(789456, format: :json),
+      pdf_url: invoice_url(789456, format: :pdf)
+    }
+    respond_to do |format|
+      format.html
+    end
+  end
 
   def index
     @invoices = Invoice.all

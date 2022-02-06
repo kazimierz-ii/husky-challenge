@@ -1,0 +1,38 @@
+<p>Hi, welcome to the Invoice API documentation.</p>
+<p>
+  All endpoints on this API are JSON, and all require a token as a param to access it.<br/>
+  If you don't have a token please access the <%= link_to 'home page', root_path %> and create one.
+</p>
+<p>
+  List invoices:<br/>
+  <i>GET <%= invoices_url(format: :json, token: 'TOKEN') %></i><br/>
+  Optional filter params:<br/>
+  invoice_number: performs a <i>LIKE %invoice_number%</i><br/>
+  invoice_date_from: performs a <i>invoice_date >= invoice_date_from</i><br/>
+  invoice_date_to: performs a <i>invoice_date <= invoice_date_to</i><br/>
+  Response exemple:<br/>
+  <%= [@sample_invoice, @sample_invoice].to_json %>
+</p>
+<p>
+  Show invoice:<br/>
+  <i>GET <%= invoice_url('ID', format: :json, token: 'TOKEN') %></i><br/>
+  Response exemple:<br/>
+  <%= @sample_invoice.to_json %>
+</p>
+<p>
+  Create and send invoice:<br/>
+  <i>POST <%= invoices_url(format: :json) %></i><br/>
+  Body exemple:<br/>
+  <%= { token: 'TOKEN', invoice: @sample_invoice.except(:id, :url, :pdf_url) }.to_json %><br/>
+  Response exemple:<br/>
+  <%= @sample_invoice.to_json %>
+</p>
+<p>
+  Send existing invoice to new emails:<br/>
+  <i>PUT <%= invoice_url('ID', format: :json) %></i><br/>
+  Body exemple:<br/>
+  <%= { token: 'TOKEN', invoice: { emails: 'sample2@email.com,email2@sample.com'} }.to_json %><br/>
+  Response exemple:<br/>
+  <%= @sample_invoice.merge(id: 'NEW_ID', emails: 'sample2@email.com,email2@sample.com', url: invoice_url('NEW_ID', format: :json),
+      pdf_url: invoice_url('NEW_ID', format: :pdf)).to_json %>
+</p>
