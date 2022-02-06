@@ -19,7 +19,7 @@ class TokensController < ApplicationController
 
     if access_token
       access_token.approve! if access_token.pending?
-      access_token.user.access_tokens.pending_or_approved.map { |at| at.revoke! }
+      access_token.user.access_tokens.pending_or_approved.where('id != ?', access_token.id).map { |at| at.revoke! }
       access_token.touch_last_access_at!
       session[:current_user_id] = access_token.user_id
 
