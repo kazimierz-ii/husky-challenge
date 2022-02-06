@@ -30,11 +30,19 @@ Eu não fiz cobertura de testes, eu não tenho experiencia em TDD/BDD, sempre ti
 
 1) Instale as dependências de ambiente.
 
-2) Crie o aquivo `config/database.yml` a partir do `config/database.yml.sample`.
+2) Crie o arquivo `config/master.key`.
 
-3) Configure o arquivo `config/database.yml`.
+```sh
+echo '2500af7274898ae80b2c62be1bbbb64f' > config/master.key
 
-4) Execute `bin/setup`
+chmod 600 config/master.key
+```
+
+3) Crie o aquivo `config/database.yml` a partir do `config/database.yml.sample`.
+
+4) Configure o arquivo `config/database.yml`.
+
+5) Execute `bin/setup`
 
 ## Desenvolvimento
 

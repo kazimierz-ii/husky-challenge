@@ -22,9 +22,9 @@ class AccessToken < ApplicationRecord
 
   def set_unique_token_and_send_mail
     # Usa ID e o SALT para criar um token unico
-    access_token = Base64.strict_encode64("#{id}_#{SALT}").gsub(/=/, '')
-    self.update_column(:token, access_token)
-    self.token = access_token
+    access_token = Digest::SHA2.hexdigest("#{id}_#{Rails.application.credentials.access_token_salt}").gsub(/=/, '')
+    self.update_column(:token, access_token) # usa o update column pra colocar o valor no banco sem callback
+    self.token = access_token # usa a setter pra ter o valor pra ser usado no mailer abaixo
 
     AccessTokenMailer.with(access_token: self, user: self.user).created.deliver_now
   end
