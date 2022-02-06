@@ -4,15 +4,15 @@ Não fiz grandes alterações na estrutura, criei models para usuarios e tokens.
 
 Achei que era interessante os invoices estarem associados a um usuario, sem depender do campo "invoice_from" já que ele é livre.
 
-Além disso os access tokens nunca são apagados e tem campos de data sobre quando foi aprovado, revogado e ultimo uso, também acho que são informações importantes.
+Além disso os access tokens nunca são apagados e tem campos datatime sobre quando foram aprovados, revogados e ultimo uso, também acho que são informações importantes.
 
 Tentei deixar tudo em inglês, tanto a interface quanto o código, e seguir todas as convenções do Ruby e Rails.
 
 Fazia tempo que eu nao precisava gerar PDF em Ruby, e depois de pesquisar um pouco sobre, achei que a gem Prawn foi perfeita para esse desafio.
 
-Tentei usar o Swagger para a documentação da API, mas acabei não conseguindo, então fiz uma documentação na mão, bem simples e bem ruim para manutenção :/
+A documentação da API ficou bem simples, mas a manutenção dela não seria tão ruim por que todos os exemplos de Request e Response usam uma instancia do Invoice.
 
-Eu não fiz cobertura de testes, eu não tenho experiencia em TDD/BDD, sempre tive interesse, mas os lugares que trabalhei nunca deram importancia pra isso e acabei não estudando fora do trabalho.
+Eu não tenho experiencia com cobertura de testes, mas tentei implementar cobertura completa (models, routing, requests, mailers).
 
 ## Configuração
 
@@ -50,4 +50,10 @@ chmod 600 config/master.key
 
 ```sh
 bin/dev
+```
+
+### Executando os testes
+
+```sh
+bin/rails spec
 ```

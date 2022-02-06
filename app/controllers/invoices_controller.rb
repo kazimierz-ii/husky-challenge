@@ -1,15 +1,15 @@
 class InvoicesController < ApplicationController
   before_action do
-    if action_name != 'api_doc'
-      if request.format.html? && !current_user
+    if request.format.html?
+      if action_name != 'api_doc' && !current_user
         redirect_to(root_path, notice: 'Unauthorized access!')
-      elsif request.format.json?
-        access_token = AccessToken.approved.find_by_token(params[:token])
-        if access_token
-          access_token.touch_last_access_at!
-        else
-          render json: { message: 'You need a valid token to use the API.' }, status: :unauthorized
-        end
+      end
+    elsif request.format.json?
+      access_token = AccessToken.approved.find_by_token(params[:token])
+      if access_token
+        access_token.touch_last_access_at!
+      else
+        render json: { message: 'You need a valid token to use the API.' }, status: :unauthorized
       end
     end
   end

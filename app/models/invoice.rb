@@ -1,7 +1,19 @@
 class Invoice < ApplicationRecord
   belongs_to :user
 
-  after_save do
+  validates :user, :invoice_number, :invoice_date, :invoice_from, :invoice_to, :total_amount_due, :emails, presence: true
+  validate :multiple_emails
+
+  def multiple_emails
+    emails.split(/,\s*/).each do |email|
+      unless email =~ URI::MailTo::EMAIL_REGEXP
+        errors.add(:emails, "are invalid due to #{email}")
+      end
+    end
+  end
+
+  # Achei melhor trocar para after create por causa do fluxo que define quando envia para outros emails
+  after_create do
     InvoiceMailer.with(invoice: self).created.deliver_now
   end
 

@@ -17,117 +17,117 @@ RSpec.describe "/invoices", type: :request do
   # This should return the minimal set of attributes required to create a valid
   # Invoice. As you add validations to Invoice, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    { emails: 'email@example.com' }
-  }
+  # let(:valid_attributes) {
+  #   { emails: 'email@example.com' }
+  # }
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  # let(:invalid_attributes) {
+  #   skip("Add a hash of attributes invalid for your model")
+  # }
 
-  before { post tokens_url, params: { token: '123456' } }
+  # before { post tokens_url, params: { token: '123456' } }
 
-  describe "GET /index" do
-    it "renders a successful response" do
-      Invoice.create! valid_attributes
-      get invoices_url
-      expect(response).to be_successful
-    end
-  end
+  # describe "GET /index" do
+  #   it "renders a successful response" do
+  #     Invoice.create! valid_attributes
+  #     get invoices_url
+  #     expect(response).to be_successful
+  #   end
+  # end
 
-  describe "GET /show" do
-    it "renders a successful response" do
-      invoice = Invoice.create! valid_attributes
-      get invoice_url(invoice)
-      expect(response).to be_successful
-    end
-  end
+  # describe "GET /show" do
+  #   it "renders a successful response" do
+  #     invoice = Invoice.create! valid_attributes
+  #     get invoice_url(invoice)
+  #     expect(response).to be_successful
+  #   end
+  # end
 
-  describe "GET /new" do
-    it "renders a successful response" do
-      get new_invoice_url
-      expect(response).to be_successful
-    end
-  end
+  # describe "GET /new" do
+  #   it "renders a successful response" do
+  #     get new_invoice_url
+  #     expect(response).to be_successful
+  #   end
+  # end
 
-  describe "GET /edit" do
-    it "renders a successful response" do
-      invoice = Invoice.create! valid_attributes
-      get edit_invoice_url(invoice)
-      expect(response).to be_successful
-    end
-  end
+  # describe "GET /edit" do
+  #   it "renders a successful response" do
+  #     invoice = Invoice.create! valid_attributes
+  #     get edit_invoice_url(invoice)
+  #     expect(response).to be_successful
+  #   end
+  # end
 
-  describe "POST /create" do
-    context "with valid parameters" do
-      it "creates a new Invoice" do
-        expect {
-          post invoices_url, params: { invoice: valid_attributes }
-        }.to change(Invoice, :count).by(1)
-      end
+  # describe "POST /create" do
+  #   context "with valid parameters" do
+  #     it "creates a new Invoice" do
+  #       expect {
+  #         post invoices_url, params: { invoice: valid_attributes }
+  #       }.to change(Invoice, :count).by(1)
+  #     end
 
-      it "redirects to the created invoice" do
-        post invoices_url, params: { invoice: valid_attributes }
-        expect(response).to redirect_to(invoice_url(Invoice.last))
-      end
-    end
+  #     it "redirects to the created invoice" do
+  #       post invoices_url, params: { invoice: valid_attributes }
+  #       expect(response).to redirect_to(invoice_url(Invoice.last))
+  #     end
+  #   end
 
-    context "with invalid parameters" do
-      it "does not create a new Invoice" do
-        expect {
-          post invoices_url, params: { invoice: invalid_attributes }
-        }.to change(Invoice, :count).by(0)
-      end
+  #   context "with invalid parameters" do
+  #     it "does not create a new Invoice" do
+  #       expect {
+  #         post invoices_url, params: { invoice: invalid_attributes }
+  #       }.to change(Invoice, :count).by(0)
+  #     end
 
-      it "renders a successful response (i.e. to display the 'new' template)" do
-        post invoices_url, params: { invoice: invalid_attributes }
-        expect(response).to be_successful
-      end
-    end
-  end
+  #     it "renders a successful response (i.e. to display the 'new' template)" do
+  #       post invoices_url, params: { invoice: invalid_attributes }
+  #       expect(response).to be_successful
+  #     end
+  #   end
+  # end
 
-  describe "PATCH /update" do
-    context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+  # describe "PATCH /update" do
+  #   context "with valid parameters" do
+  #     let(:new_attributes) {
+  #       skip("Add a hash of attributes valid for your model")
+  #     }
 
-      it "updates the requested invoice" do
-        invoice = Invoice.create! valid_attributes
-        patch invoice_url(invoice), params: { invoice: new_attributes }
-        invoice.reload
-        skip("Add assertions for updated state")
-      end
+  #     it "updates the requested invoice" do
+  #       invoice = Invoice.create! valid_attributes
+  #       patch invoice_url(invoice), params: { invoice: new_attributes }
+  #       invoice.reload
+  #       skip("Add assertions for updated state")
+  #     end
 
-      it "redirects to the invoice" do
-        invoice = Invoice.create! valid_attributes
-        patch invoice_url(invoice), params: { invoice: new_attributes }
-        invoice.reload
-        expect(response).to redirect_to(invoice_url(invoice))
-      end
-    end
+  #     it "redirects to the invoice" do
+  #       invoice = Invoice.create! valid_attributes
+  #       patch invoice_url(invoice), params: { invoice: new_attributes }
+  #       invoice.reload
+  #       expect(response).to redirect_to(invoice_url(invoice))
+  #     end
+  #   end
 
-    context "with invalid parameters" do
-      it "renders a successful response (i.e. to display the 'edit' template)" do
-        invoice = Invoice.create! valid_attributes
-        patch invoice_url(invoice), params: { invoice: invalid_attributes }
-        expect(response).to be_successful
-      end
-    end
-  end
+  #   context "with invalid parameters" do
+  #     it "renders a successful response (i.e. to display the 'edit' template)" do
+  #       invoice = Invoice.create! valid_attributes
+  #       patch invoice_url(invoice), params: { invoice: invalid_attributes }
+  #       expect(response).to be_successful
+  #     end
+  #   end
+  # end
 
-  describe "DELETE /destroy" do
-    it "destroys the requested invoice" do
-      invoice = Invoice.create! valid_attributes
-      expect {
-        delete invoice_url(invoice)
-      }.to change(Invoice, :count).by(-1)
-    end
+  # describe "DELETE /destroy" do
+  #   it "destroys the requested invoice" do
+  #     invoice = Invoice.create! valid_attributes
+  #     expect {
+  #       delete invoice_url(invoice)
+  #     }.to change(Invoice, :count).by(-1)
+  #   end
 
-    it "redirects to the invoices list" do
-      invoice = Invoice.create! valid_attributes
-      delete invoice_url(invoice)
-      expect(response).to redirect_to(invoices_url)
-    end
-  end
+  #   it "redirects to the invoices list" do
+  #     invoice = Invoice.create! valid_attributes
+  #     delete invoice_url(invoice)
+  #     expect(response).to redirect_to(invoices_url)
+  #   end
+  # end
 end

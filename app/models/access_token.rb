@@ -1,6 +1,4 @@
 class AccessToken < ApplicationRecord
-  SALT = '93hefZI9SBWRPatkPWcLxWyr'.freeze
-
   class Status
     PENDING  = 'p'
     APPROVED = 'a'
