@@ -1,16 +1,12 @@
 # Husky Challenge
 
-Esse é um projeto base para te ajudar na solução do [desafio Husky](https://github.com/husky-misc/code-challenge/issues/33).
-
-Você vai encontrar um setup inicial da autenticação, controle das invoices e e-mail de notificação.
-
-A ideia aqui é dar um empurrão inicial para te ajudar nas implementações, mas... cuidado, esse empurrão pode não ser para a direção correta.
-
-O projeto foi implementado de uma forma bem básica, fazendo uso de uma abordagem diferente do que praticamos na Husky. Nós queremos ver justamente o seu processo de trabalho e decisões para melhorar a arquitetura e funcionamento da aplicação.
-
-> Dica: leve em consideração o que descrevemos nos tópicos `Solução`, `Expectativas` e `Contexto: O que utilizamos / fazemos na Husky` do [desafio](https://github.com/husky-misc/code-challenge/issues/33).
-
-**Importante:** você não precisa ficar preso a estrutra desse projeto. Sinta-se a vontade para modificar o que achar necessário. Ex: README, adicionar/modificar/remover dependências, arquivos e diretórios...
+Não fiz grandes alterações na estrutura, criei models para usuarios e tokens.
+Achei que era interessante os invoices estarem associados a um usuario, sem depender do campo "invoice_from" já que ele é livre.
+Além disso os access tokens nunca são apagados e tem campos de data sobre quando foi aprovado, revogado e ultimo uso, também acho que são informações importantes.
+Tentei deixar tudo em inglês, tanto a interface quanto o código, e seguir todas as convenções do Ruby e Rails.
+Fazia tempo que eu nao precisava gerar PDF em Ruby, e depois de pesquisar um pouco sobre, achei que a gem Prawn foi perfeita para esse desafio.
+Tentei usar o Swagger para a documentação da API, mas acabei não conseguindo, então fiz uma documentação na mão, bem simples e bem ruim para manutenção :/
+Eu não fiz cobertura de testes, eu não tenho experiencia em TDD/BDD, sempre tive interesse, mas os lugares que trabalhei nunca deram importancia pra isso e acabei não estudando fora do trabalho.
 
 ## Configuração
 
@@ -48,10 +44,4 @@ chmod 600 config/master.key
 
 ```sh
 bin/dev
-```
-
-### Executando os testes
-
-```sh
-bin/rails spec
 ```
