@@ -40,8 +40,8 @@ class AccessToken < ApplicationRecord
     self.status = Status::APPROVED
     self.approved_at = Time.zone.now
     self.save
-
     AccessTokenMailer.with(access_token: self, user: self.user).activated.deliver_now
+    self
   end
 
   def revoke!
